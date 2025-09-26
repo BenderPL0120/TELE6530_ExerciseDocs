@@ -10,40 +10,44 @@ NOTE: Include two full paragraphs describing your implementation approach by ans
 
 What does your implementation do? 
 
+A: Build data generator to simulate sensing and actuation in CDA
+
 How does your implementation work?
+
+A: 
+
+Data Model Layer: Implement three concrete data classes - `SensorData` for sensor readings, `ActuatorData` for actuator commands responses, and `SystemPerformanceData` for system metrics
+
+Simulation Layer: Complete `BaseSensorSimTask` for sensor simulation logic, then implement `TemperatureSensorSimTask`, `HumiditySensorSimTask`, and `PressureSensorSimTask`. Similarly, complete `BaseActuatorSimTask` for actuator control logic with state tracking, then implement `HvacActuatorSimTask` and `HumidifierActuatorSimTask`
+
+Management Layer: Complete `SensorAdapterManager` to handle periodic sensor polling, `ActuatorAdapterManager` to dispatch actuator commands based on type ID, and finally link both to `DeviceDataManager`, handling local control logic and preparing data for upstream transmission.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/BenderPL0120/TELE6530_ConstrainedDevice/tree/labmodule03
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+![CDA-03_1](./CDA-03_1.png)
+![CDA-03_2](./CDA-03_2.png)
+![CDA-03_3](./CDA-03_3.png)
 
 
 ### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
-
-- 
-- 
-- 
+- test_ActuatorData
+- test_SensorData
+- test_SystemPerformanceData
+- test_HumiditySensorSimTask
+- test_PressureSensorSimTask
+- test_TemperatureSensorSimTask
+- test_HumidifierActuatorSimTask
+- test_HvacActuatorSimTask
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
-- 
-- 
+- test_SensorAdapterManager
+- test_DeviceDataManagerNoComms
+- test_ConstrainedDeviceApp
 
 EOF.
