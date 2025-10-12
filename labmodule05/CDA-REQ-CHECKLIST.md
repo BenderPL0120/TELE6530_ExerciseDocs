@@ -4,10 +4,10 @@
 
 ### REQUIRED for Connected Devices Course
 
-- [ ] [PIOT-CDA-05-000](https://github.com/programming-the-iot/book-exercise-tasks/issues/12)
-- [ ] [PIOT-CDA-05-001](https://github.com/programming-the-iot/book-exercise-tasks/issues/143)
-- [ ] [PIOT-CDA-05-002](https://github.com/programming-the-iot/book-exercise-tasks/issues/63)
-- [ ] [PIOT-CDA-05-100](https://github.com/programming-the-iot/book-exercise-tasks/issues/6)
+- [✔] [PIOT-CDA-05-000](https://github.com/programming-the-iot/book-exercise-tasks/issues/12)
+- [✔] [PIOT-CDA-05-001](https://github.com/programming-the-iot/book-exercise-tasks/issues/143)
+- [✔] [PIOT-CDA-05-002](https://github.com/programming-the-iot/book-exercise-tasks/issues/63)
+- [✔] [PIOT-CDA-05-100](https://github.com/programming-the-iot/book-exercise-tasks/issues/6)
 
 ### OPTIONAL for Connected Devices Course (do these BEFORE PIOT-CDA-05-100!)
 

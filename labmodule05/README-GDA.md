@@ -10,40 +10,40 @@ NOTE: Include two full paragraphs describing your implementation approach by ans
 
 What does your implementation do? 
 
+A: Developed GDA featuring system performance monitoring, sensor/actuator data management, and multi-protocol communication support
+
 How does your implementation work?
+
+A: 
+
+`SystemDiskUtilTask`: Calculates disk utilization percentage by monitoring used space. 
+
+`SystemPerformanceManager`: Periodically collects CPU, memory, and disk metrics via scheduled tasks and forwards performance data to registered listeners`
+
+`ActuatorData`: Encapsulates actuator command data
+
+`SensorData`: Represents sensor measurement data with value tracking and timestamp management
+
+`DeviceDataManager`: Manages all protocol connections and routing telemetry messages between system components
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/BenderPL0120/TELE6530_GatewayDevice/tree/labmodule05
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
-
+![GDA-05](./GDA-05.png)
 
 ### Unit Tests Executed
 
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
-
-- 
-- 
-- 
+- ActuatorDataTest
+- SensorDataTest
+- SystemPerformanceDataTest
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
-- 
-- 
-
+- SystemPerformanceManagerTest
+- DataIntegrationTest
+- DeviceDataManagerNoCommsTest
+- GatewayDeviceAppTest
 EOF.
