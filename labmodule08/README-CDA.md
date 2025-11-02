@@ -10,26 +10,21 @@ NOTE: Include two full paragraphs describing your implementation approach by ans
 
 What does your implementation do? 
 
+A: CoAP server for system performance monitoring, sensor telemetry collection, and actuator command processing. The server uses resource handlers to expose device data and accept control commands through standard CoAP methods (GET/PUT/POST/DELETE).
+
 How does your implementation work?
+
+A: The `CoapServerAdapter` creates an async CoAP server using aiocoap that registers three types of resource handlers - `GetSystemPerformanceResourceHandler` and `GetTelemetryResourceHandler` act as observable resources that automatically notify subscribers when data updates occur, while `UpdateActuatorResourceHandler` processes incoming JSON commands and returns response status. All handlers interface with a data message listener that bridges between the CoAP protocol layer and the actual device/sensor management logic.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/BenderPL0120/TELE6530_ConstrainedDevice/tree/labmodule08
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
-
+![CDA-08](./CDA-08.png)
 
 ### Unit Tests Executed
-
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
 - 
 - 
@@ -37,12 +32,7 @@ since you need to ensure you haven't introduced regressions.
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
+- test_CoapServerAdapter
 - 
 - 
 

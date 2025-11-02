@@ -10,26 +10,22 @@ NOTE: Include two full paragraphs describing your implementation approach by ans
 
 What does your implementation do? 
 
+A: CoAP server gateway that receives telemetry data from IoT devices via PUT requests, and provides actuator commands back to devices via GET requests with support for the CoAP Observe pattern for real-time updates.
+
 How does your implementation work?
+
+A: The `CoapServerGateway` creates a hierarchical resource tree with specialized handlers - `UpdateTelemetryResourceHandler` and `UpdateSystemPerformanceResourceHandler` process incoming PUT requests with JSON payloads from constrained devices, while `GetActuatorCommandResourceHandler` serves actuator commands via GET requests and automatically notifies observing clients when commands change through the CoAP Observable mechanism.
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/BenderPL0120/TELE6530_GatewayDevice/tree/labmodule08
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
+![GDA-08](./GDA-08.png)
 
 
 ### Unit Tests Executed
-
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
 - 
 - 
@@ -37,12 +33,7 @@ since you need to ensure you haven't introduced regressions.
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
+- CoapServerGatewayTest
 - 
 - 
 
