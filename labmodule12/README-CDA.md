@@ -10,26 +10,43 @@ NOTE: Include two full paragraphs describing your implementation approach by ans
 
 What does your implementation do? 
 
+A: Added a smart window control system with environmental safety features:
+
+`Orientation sensor`: Reads pitch angle to detect user intent (tilt device to open/close window)
+
+`Magnetic sensor`: Reads yaw/heading to detect wind direction as a safety constraint
+
+`Window Display actuator`: Shows window state on LED matrix (green vertical line = open, red diagonal = closed)
+
+`Buzzer actuator`: Plays distinct sounds for window open/close events (Zelda sound effects)
+
+The system allows pitch-based window control but automatically forces the window closed when cold/direct wind is detected (yaw between -50° and 50°).
+
 How does your implementation work?
+
+A: 
+Sensors use SenseHAT's IMU: `OrientationSensorEmulatorTask` calculates pitch from accelerometer data; 
+`MagneticSensorEmulatorTask` reads compass/yaw with calibration offset
+
+`DeviceDataManager` maintains lastPitch and lastYaw state variables, and _evaluateAndActuateWindow() implements a two-layer decision logic:
+  Layer 1: If yaw indicates direct wind → force CLOSE (safety override)
+  Layer 2: Otherwise, pitch > 50° → OPEN, pitch < -10° → CLOSE (with hysteresis)
+
+`WindowDisplayEmulatorTask` draws patterns on the 8×8 LED matrix using `pisense.array()`
+
+`BuzzerEmulatorTask` uses `pygame.mixer` to play WAV files on activation/deactivation
+
+State changes trigger both the LED display update and sound playback via `_triggerSoundAlert()`
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/BenderPL0120/TELE6530_ConstrainedDevice/tree/labmodule12
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
-
+![CDA-12](./CDA-12.png)
 
 ### Unit Tests Executed
-
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
 - 
 - 
@@ -37,13 +54,8 @@ since you need to ensure you haven't introduced regressions.
 
 ### Integration Tests Executed
 
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
-
-- 
-- 
-- 
+- test_BuzzerEmulatorTask
+- test_MagneticSensorEmulatorTask
+- test_OrientationSensorEmulatorTask
 
 EOF.

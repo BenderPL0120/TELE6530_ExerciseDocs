@@ -10,37 +10,53 @@ NOTE: Include two full paragraphs describing your implementation approach by ans
 
 What does your implementation do? 
 
+A: The GDA was extended to support smart window control with cloud integration and safety override:
+
+`Orientation/Magnetic sensor analysis`: GDA now processes pitch (user intent) and yaw (wind safety) data from CDA to make window control decisions
+
+`Cloud command integration`: Added cloud-to-edge window control via Ubidots, allowing remote open/close commands
+
+`Multi-layer priority system`: Cloud commands take precedence over local sensor control, with a 120-second lockout period
+
+`Safety validation`: GDA blocks cloud "OPEN" commands if local yaw data indicates unsafe wind conditions
+
+`Buzzer synchronization`: GDA triggers sound alerts on CDA whenever window state changes
+
 How does your implementation work?
+
+A: For `DeviceDataManager`:
+
+Added `handleOrientationSensorAnalysis()`: Evaluates pitch data → triggers window OPEN (pitch > 50°) or CLOSE (pitch < -10°) with time-based threshold
+
+Added `handleMagneticSensorAnalysis()`: Safety lock → forces window CLOSE when yaw is between -50° and 50° (direct wind)
+
+Added `triggerSoundAlert(locationID, command)`: Sends BUZZER_ACTUATOR_TYPE command to CDA via MQTT, synchronized with window actions
+
+Added cloud lockout logic: `lastCloudWindowCommandTime + CLOUD_CMD_LOCKOUT_SECONDS` (120s) prevents local control from overriding recent cloud commands
+
+Added safety check in `handleIncomingMessage()`: Validates yaw before allowing cloud OPEN commands; rejects if unsafe wind detected
+
+For `CloudClientConnector`:
+
+Added `WindowControlMessageListener` inner class
+
+Subscribes to cloud window topic in `onConnect()`
 
 ### Code Repository and Branch
 
-NOTE: Be sure to include the branch (e.g. https://github.com/programming-the-iot/python-components/tree/alpha001).
-
-URL: 
+URL: https://github.com/BenderPL0120/TELE6530_GatewayDevice/tree/labmodule12
 
 ### UML Design Diagram(s)
 
-NOTE: Include one or more UML designs representing your solution. It's expected each
-diagram you provide will look similar to, but not the same as, its counterpart in the
-book [Programming the IoT](https://learning.oreilly.com/library/view/programming-the-internet/9781492081401/).
-
+![GDA-12](./GDA-12.png)
 
 ### Unit Tests Executed
-
-NOTE: TA's will execute your unit tests. You only need to list each test case below
-(e.g. ConfigUtilTest, DataUtilTest, etc). Be sure to include all previous tests, too,
-since you need to ensure you haven't introduced regressions.
 
 - 
 - 
 - 
 
 ### Integration Tests Executed
-
-NOTE: TA's will execute most of your integration tests using their own environment, with
-some exceptions (such as your cloud connectivity tests). In such cases, they'll review
-your code to ensure it's correct. As for the tests you execute, you only need to list each
-test case below (e.g. SensorSimAdapterManagerTest, DeviceDataManagerTest, etc.)
 
 - 
 - 
